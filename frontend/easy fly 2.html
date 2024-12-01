@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Fly 2</title>
+</head>
+<body>
+    <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; height: 100vh;">
+        <body style="background-color:rgb(236, 240, 244);"></body>
+        
+        <!-- Image Section -->
+        <div class="padd space label">
+            <img src="images/software logo.png" alt="software logo" width="200">
+        </div>
+
+        <!-- Form Section -->
+        <form action="/action_page.php">
+            <label for="F_name">First name:</label><br>
+            <input type="text" id="F_name" name="F_name" placeholder="Enter your first name"><br><br>
+
+            <label for="L_name">Last name:</label><br>
+            <input type="text" id="L_name" name="L_name" placeholder="Enter your last name"><br><br>
+
+            <label for="U_name">User name:</label><br>
+            <input type="text" id="U_name" name="U_name" placeholder="Enter username"><br><br>
+
+            <label for="E_name">E-mail:</label><br>
+            <input type="text" id="E_name" name="E_name" placeholder="Enter your email"><br><br>
+
+            <label for="Password">Password:</label><br>
+            <input type="text" id="Password" name="Password" placeholder="Enter your Password"><br><br>
+
+            <label for="C_password">Confirm Password:</label><br>
+            <input type="text" id="C_password" name="C_password" placeholder="Confirm your password"><br><br>
+
+            <input type="submit" value="Submit" class="button">
+        </form>
+        <style>
+            input {
+                border-radius: 10px;
+                border: 1px solid #ccc;
+                padding: 10px;
+                width: 200px;
+            }
+            label {
+                font-weight: bold;
+            }
+            .button:hover {
+                background-color: rgb(193, 154, 228); /* Optional: change on hover */
+                /* Optional: change text color on hover */
+            }
+            .button {
+                background-color: rgb(104, 48, 236);
+                color: white;
+                border-radius: 10px;
+                cursor: pointer;
+            }
+            .padd {
+                padding: 20px;
+            }
+            .space {
+                display: flex;
+                justify-content: baseline;
+                align-items: center;
+                
+            }
+        </style>
+    </div>
+</body>
+</html>
