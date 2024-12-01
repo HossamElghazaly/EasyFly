@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Easy Fly 2</title>
 </head>
-<body>
+<body style="background-color: rgb(236, 240, 244);">
     <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; height: 100vh;">
-        <body style="background-color:rgb(236, 240, 244);"></body>
-        
         <!-- Image Section -->
         <div class="padd space label">
-            <img src="images/software logo.png" alt="software logo" width="200">
+            <img src="C:\Users\fadyb\EasyFly\frontend\images\software logo.png"g" alt="Software Logo" width="200">
         </div>
 
         <!-- Form Section -->
@@ -29,43 +27,18 @@
             <input type="text" id="E_name" name="E_name" placeholder="Enter your email"><br><br>
 
             <label for="Password">Password:</label><br>
-            <input type="text" id="Password" name="Password" placeholder="Enter your Password"><br><br>
+            <input type="password" id="Password" name="Password" placeholder="Enter your password"><br><br>
 
             <label for="C_password">Confirm Password:</label><br>
-            <input type="text" id="C_password" name="C_password" placeholder="Confirm your password"><br><br>
+            <input type="password" id="C_password" name="C_password" placeholder="Confirm your password"><br><br>
 
             <input type="submit" value="Submit" class="button">
         </form>
-        <style>
-            input {
-                border-radius: 10px;
-                border: 1px solid #ccc;
-                padding: 10px;
-                width: 200px;
-            }
-            label {
-                font-weight: bold;
-            }
-            .button:hover {
-                background-color: rgb(193, 154, 228); /* Optional: change on hover */
-                /* Optional: change text color on hover */
-            }
-            .button {
-                background-color: rgb(104, 48, 236);
-                color: white;
-                border-radius: 10px;
-                cursor: pointer;
-            }
-            .padd {
-                padding: 20px;
-            }
-            .space {
-                display: flex;
-                justify-content: baseline;
-                align-items: center;
-                
-            }
-        </style>
+
+        <div class="center">
+            <p>Already have an account? <a href="#" id="signInLink">Sign in</a></p>
+        </div>
     </div>
+    <script src="Interface.js"></script> 
 </body>
 </html>
