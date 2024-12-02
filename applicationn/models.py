@@ -1,19 +1,19 @@
-from . import db
+from . import sql
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 
 
-class Note(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    data = db.Column(db.String(10000))
-    date = db.Column(db.DateTime(timezone=True), default=func.now())
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+class Note(sql.Model):
+    id = sql.Column(sql.Integer, primary_key=True)
+    data = sql.Column(sql.String(10000))
+    date = sql.Column(sql.DateTime(timezone=True), default=func.now())
+    user_id = sql.Column(sql.Integer, sql.ForeignKey('user.id'))
 
 
-class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(150), unique=True, nullable=False)
-    password = db.Column(db.String(150), nullable=False)
-    firstname = db.Column(db.String(150), nullable=False)
-    lastname = db.Column(db.String(150), nullable=True)
-    username = db.Column(db.String(150), unique=True, nullable=False)
+class User(sql.Model, UserMixin):
+    id = sql.Column(sql.Integer, primary_key=True)
+    email = sql.Column(sql.String(150), unique=True, nullable=False)
+    password = sql.Column(sql.String(150), nullable=False)
+    firstname = sql.Column(sql.String(150), nullable=False)
+    lastname = sql.Column(sql.String(150), nullable=True)
+    username = sql.Column(sql.String(150), unique=True, nullable=False)
