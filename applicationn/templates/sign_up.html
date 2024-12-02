@@ -1,48 +1,49 @@
-{% extends "base.html" %} {% block title %}Sign Up{% endblock %} {% block
-    content %}
-    <form method="POST">
-      <h3 align="center">Sign Up</h3>
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          name="email"
-          placeholder="Enter email"
-        />
-      </div>
-      <div class="form-group">
-        <label for="firstName">First Name</label>
-        <input
-          type="text"
-          class="form-control"
-          id="firstName"
-          name="firstName"
-          placeholder="Enter first name"
-        />
-      </div>
-      <div class="form-group">
-        <label for="password1">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          id="password1"
-          name="password1"
-          placeholder="Enter password"
-        />
-      </div>
-      <div class="form-group">
-        <label for="password2">Password (Confirm)</label>
-        <input
-          type="password"
-          class="form-control"
-          id="password2"
-          name="password2"
-          placeholder="Confirm password"
-        />
-      </div>
-      <br />
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-    {% endblock %}
+{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
+    %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Fly 2</title>
+</head>
+<body style="background-color: rgb(236, 240, 244);">
+    <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; height: 100vh;">
+        <!-- Image Section -->
+        <div class="padd space label">
+            <img src="C:\Users\dell\Desktop\EasyFly\applicationn\static\soft 2 photo.png" alt="soft 2 photo" width="200">
+        </div>
+
+        <!-- Form Section -->
+        <form action="{{url_for('auth.sign_up')}}" method="POST">
+            <label for="firstName">First name:</label><br>
+            <input type="text" id="firstName" name="firstName" placeholder="Enter your first name"><br><br>
+
+            <label for="lastname">Last name:</label><br>
+            <input type="text" id="lastname" name="lastname" placeholder="Enter your last name"><br><br>
+
+            <label for="username">User name:</label><br>
+            <input type="text" id="username" name="username" placeholder="Enter username"><br><br>
+
+            <label for="email">E-mail:</label><br>
+            <input type="text" id="email" name="email" placeholder="Enter your email"><br><br>
+
+            <label for="password1">Password:</label><br>
+            <input type="password" id="password1" name="password1" placeholder="Enter your password"><br><br>
+
+            <label for="password2">Confirm Password:</label><br>
+            <input type="password" id="password2" name="password2" placeholder="Confirm your password"><br><br>
+
+            <input type="submit" value="Submit" class="button">
+        </form>
+
+        <div class="center">
+            <p>Already have an account? <a href="{{url_for('auth.login')}}" id="signInLink">Sign in</a></p>
+        </div>
+    </div>
+    <script src="Interface.js"></script> 
+</body>
+</html>
+
+{% endblock %}

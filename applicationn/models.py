@@ -12,7 +12,8 @@ class Note(db.Model):
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(150), unique=True)
-    password = db.Column(db.String(150))
-    first_name = db.Column(db.String(150))
-    notes = db.relationship('Note')
+    email = db.Column(db.String(150), unique=True, nullable=False)
+    password = db.Column(db.String(150), nullable=False)
+    firstname = db.Column(db.String(150), nullable=False)
+    lastname = db.Column(db.String(150), nullable=True)
+    username = db.Column(db.String(150), unique=True, nullable=False)
