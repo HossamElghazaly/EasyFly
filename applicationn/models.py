@@ -12,8 +12,9 @@ class Note(sql.Model):
 
 class User(sql.Model, UserMixin):
     id = sql.Column(sql.Integer, primary_key=True)
-    email = sql.Column(sql.String(150), unique=True, nullable=False)
-    password = sql.Column(sql.String(150), nullable=False)
-    firstname = sql.Column(sql.String(150), nullable=False)
+    email = sql.Column(sql.String(150), unique=True, nullable=False)  # تأكد من أن الإيميل فريد
+    password = sql.Column(sql.String(150), nullable=False)  # تأكد من أن كلمة المرور موجودة
+    firstname = sql.Column(sql.String(150), nullable=False)  # تأكد من أن الاسم الأول موجود
     lastname = sql.Column(sql.String(150), nullable=True)
     username = sql.Column(sql.String(150), unique=True, nullable=False)
+    
