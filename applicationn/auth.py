@@ -14,8 +14,11 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
 
+    
         user = User.query.filter_by(email=email).first()
-        if user:
+        if len(email) < 4:
+            flash('Email must be greater than 3 characters.', category='error')
+        elif user:
             if check_password_hash(user.password, password):
                 flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
@@ -46,8 +49,11 @@ def sign_up():
         username = request.form.get('username')
 
         user = User.query.filter_by(email=email).first()
+        use = User.query.filter_by(username=username).first()
         if user:
             flash('Email already exists.', category='error')
+        elif use:
+            flash('Username already exists.', category='error')    
         elif len(email) < 4:
             flash('Email must be greater than 3 characters.', category='error')
         elif len(firstname) < 2:
