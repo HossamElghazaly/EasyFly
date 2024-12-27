@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyFly - Check-In</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5rem;
+            color: #1a1aff;
+            margin: 0;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: #1a1aff;
+            margin-left: 10px;
+            transform: rotate(-45deg);
+            animation: planeAnimation 1s infinite;
+        }
+
+        @keyframes planeAnimation {
+            0%, 100% {
+                transform: scale(1) rotate(-45deg);
+            }
+            50% {
+                transform: scale(1.1) rotate(-45deg);
+            }
+        }
+
+        .header {
+            background-color: #1a1aff;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 90%;
+            padding: 10px;
+            border: 2px solid #1a1aff;
+            border-radius: 25px;
+            font-size: 16px;
+        }
+
+        .btn {
+            background-color: #1a1aff;
+            color: #ffffff;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0000cc;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+        }
+
+        .footer a {
+            text-decoration: none;
+            color: #333;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        .footer a i {
+            font-size: 1.5rem;
+            color: #1a1aff;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <span class="logo-text">EasyFly</span>
+            <i class="fas fa-plane logo-icon"></i>
+        </div>
+        <div class="header">
+            <h1>Check-In</h1>
+        </div>
+        <p class="text-sm text-gray-500 mb-4">Note: Check 48 hrs to 60 mins before flight</p>
+        <div class="form-group">
+            <label for="airline">Select Airline</label>
+            <select id="airline">
+                <option>6E</option>
+                <option>6B</option>
+                <option>8D</option>
+                <option>9D</option>
+                <option>4A</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Booking">Booking Ref/PNR</label>
+            <input type="text" id="Booking" placeholder="Enter Booking Reference">
+        </div>
+        <div class="form-group">
+            <label for="Email/Last">Email/Last Name</label>
+            <input type="text" id="Email/Last" placeholder="Enter Email or Last Name">
+        </div>
+        <button class="btn">Search</button>
+        <div class="footer">
+            <a href="#">
+                <i class="fas fa-home"></i>
+                <p>Home</p>
+            </a>
+            <a href="#">
+                <i class="fas fa-plane"></i>
+                <p>Check-In</p>
+            </a>
+            <a href="#">
+                <i class="fas fa-clock"></i>
+                <p>Flight Status</p>
+            </a>
+            <a href="#">
+                <i class="fas fa-user"></i>
+                <p>Profile</p>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
