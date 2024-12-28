@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyFly Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 150%;
+            max-width: 400px; /* Slightly wider than before for balance */
+            max-height: 80%; /* Take up most of the screen height */
+            overflow-y: auto; /* Ensures content remains scrollable if needed */
+        }
+        .logo {
+            font-family: 'Pacifico', cursive;
+            font-size: 2rem;
+            color: #1a1aff;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .logo i {
+            font-size: 2rem;
+            color: #1a1aff;
+            margin-left: 5px;
+            transform: rotate(-45deg);
+            animation: planeAnimation 1s infinite;
+        }
+        @keyframes planeAnimation {
+            0%, 100% {
+                transform: scale(1) rotate(-45deg);
+            }
+            50% {
+                transform: scale(1.1) rotate(-45deg);
+            }
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333333;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #1a1aff;
+            border-radius: 25px;
+            font-size: 16px;
+        }
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 10px;
+            background-color: #1a1aff;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #0000cc;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #666666;
+        }
+        .footer a {
+            color: #1a1aff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            EasyFly <i class="fas fa-plane"></i>
+        </div>
+        <h1 class="text-2xl font-bold mb-4">Login</h1>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" placeholder="Enter your Email">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password">
+        </div>
+        <button class="btn">Log in</button>
+        <hr />
+        <div class="footer">
+            New user? <a href="#">Create new account</a>
+        </div>
+    </div>
+</body>
+</html>
+
