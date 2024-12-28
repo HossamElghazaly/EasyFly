@@ -1,0 +1,155 @@
+{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
+    %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Profile - EasyFly</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+        }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            margin-top: 30px; /* Match spacing from the Flight Status page */
+        }
+        .logo-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 2rem;
+            color: #0000FF;
+            margin: 0;
+        }
+        .logo-icon {
+            font-size: 2rem;
+            color: #0000FF;
+            margin-left: 5px;
+            transform: rotate(-45deg);
+            animation: beat 1s infinite;
+        }
+        @keyframes beat {
+            0%, 100% {
+                transform: scale(1) rotate(-45deg);
+            }
+            50% {
+                transform: scale(1.1) rotate(-45deg);
+            }
+        }
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #cce4ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 15px auto;
+        }
+        .profile-avatar span {
+            font-size: 2rem;
+            color: #1a1aff;
+            font-weight: bold;
+        }
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 10px;
+            background-color: #1a1aff;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-bottom: 10px;
+        }
+        .btn:hover {
+            background-color: #0000cc;
+        }
+        hr {
+            border: none;
+            border-top: 2px solid purple;
+            margin: 20px 0;
+        }
+        .navigation {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+        .navigation a {
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+        .navigation a i {
+            font-size: 1.5rem;
+            color: #1a1aff;
+            margin-bottom: 5px;
+        }
+        .navigation a p {
+            color: #000;
+            margin: 0;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <span class="logo-text">EasyFly</span>
+            <i class="fas fa-plane logo-icon"></i>
+        </div>
+        <h2 class="text-2xl font-bold mb-4">User Profile</h2>
+        <div class="profile-avatar">
+            <span>U</span>
+        </div>
+        <p class="text-lg font-semibold mb-2">User Name</p>
+        <button class="btn">Edit Profile</button>
+        <a href="{{ url_for('auth.change_password') }}" class="btn">Change Password</a>
+        <a href="{{ url_for('auth.logout') }}" class="btn">Log Out</a>
+        <hr />
+        <div class="navigation">
+            <a href="{{ url_for('auth.home') }}">  
+                <i class="fas fa-home"></i>
+                <p>Home</p>
+            </a>
+            <a href="{{ url_for('auth.check_in') }}">  
+                <i class="fas fa-plane"></i>
+                <p>Check-In</p>
+            </a>
+            <a href="{{ url_for('auth.flight_status') }}">  
+                <i class="fas fa-clock"></i>
+                <p>Flight Status</p>
+            </a>
+            <a href="{{ url_for('auth.profile') }}">
+                <i class="fas fa-user"></i>
+                <p>Profile</p>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
+
+{% endblock %}
