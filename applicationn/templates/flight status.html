@@ -1,3 +1,6 @@
+{% extends "base.html" %} {% block title %}sign_up{% endblock %} {% block content
+    %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -178,18 +181,19 @@
                 Flight Status Information gives you real-time information on all EGYPTAIR Group flights for yesterday, today, and tomorrow. To view flight status, you have two choices for selection: flight number or flight route.
             </p>
         </div>
-        <div class="divider"></div>
-        <div class="form-group">
-            <label for="date">Choose Date</label>
-            <input id="date" name="date" type="date" />
-        </div>
-        <div class="form-group">
-            <label for="flight-number">Flight Number *</label>
-            <input id="flight-number" placeholder="(e.g., for flight MS54544, enter 544)" type="text" />
-        </div>
-        <div class="buttons">
-            <button>Find Flight</button>
-        </div>
+        <form method="POST" action="{{ url_for('auth.flight_status') }}">
+            <div class="form-group">
+                <label for="date">Choose Date</label>
+                <input id="date" name="date" type="date" required />
+            </div>
+            <div class="form-group">
+                <label for="flight-number">Flight Number *</label>
+                <input id="flight-number" name="flight_number" placeholder="(e.g., for flight MS54544, enter 544)" type="text" required />
+            </div>
+            <div class="buttons">
+                <button type="submit">Find Flight</button>
+            </div>
+        </form>
         <div class="divider"></div>
         <div class="footer">
             <a href="{{ url_for('auth.home') }}">  
@@ -212,3 +216,4 @@
     </div>
 </body>
 </html>
+{% endblock %}

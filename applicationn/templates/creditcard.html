@@ -1,0 +1,223 @@
+{% extends "base.html" %} {% block title %}sign_up{% endblock %} {% block content
+    %}
+    
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyFly Payment Form</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffffff;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px; /* Reduced to move logo closer to form */
+        }
+
+        .logo-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 2rem;
+            color: #0000FF;
+            margin: 0;
+            margin-top: 10px; /* Reduced to move text closer to form */
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: #0000FF;
+            margin-left: 5px;
+            transform: rotate(-45deg);
+            animation: beat 1s infinite;
+        }
+
+        @keyframes beat {
+            0%, 100% {
+                transform: scale(1) rotate(-45deg);
+            }
+            50% {
+                transform: scale(1.1) rotate(-45deg);
+            }
+        }
+
+        .payment-form {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            width: 400px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .payment-header h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 22px; /* Reduced the font size */
+            color: #000; /* Changed the color to black */
+            margin: 0;
+        }
+
+        .card-logos {
+            display: flex;
+            gap: 10px;
+            position: relative;
+        }
+
+        .card-logos div,
+        .card-logos img {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-logos div:hover,
+        .card-logos img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(0, 0, 255, 0.5); /* Adds a blue glow around the image */
+            border-radius: 10px; /* Rounded corners when hovered */
+        }
+
+        .card-logos img {
+            height: 25px;
+        }
+
+        .divider {
+            border-top: 1px dashed #ccc;
+            margin: 10px 0 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-align: left;
+            color: #000;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #0000ff;
+            border-radius: 25px;
+            font-size: 16px;
+            box-sizing: border-box;
+            background-color: white;
+            color: #333;
+        }
+
+        .input-group input::placeholder {
+            color: grey;
+            font-size: 14px;
+            text-transform: none;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .toggle-save {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .toggle-save input {
+            margin-right: 10px;
+        }
+
+        .toggle-save label {
+            cursor: pointer;
+        }
+
+        .toggle-save label:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+
+        .pay-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            background-color: #0000ff;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .pay-button:hover {
+            background-color: #0000cc;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-form">
+        <div class="logo-container">
+            <span class="logo-text">EasyFly</span>
+            <i class="fas fa-plane logo-icon"></i>
+        </div>
+        <div class="payment-header">
+            <h1>Credit Card</h1>
+            <div class="card-logos">
+                <div style="background-color: #1a1f71; color: white; padding: 5px 10px; border-radius: 5px; display: flex; align-items: center; justify-content: center; height: 25px;">
+                    <span style="font-size: 14px; font-weight: bold;">VISA</span>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: center; height: 25px;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png" alt="MasterCard logo" style="height: 25px;">
+                </div>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <form method="POST" action="{{ url_for('auth.payment') }}">
+            <div class="input-group">
+                <label for="card-number">Card Number</label>
+                <input type="text" id="card-number" name="card_number" placeholder="Card Number" required>
+            </div>
+            <div class="input-group">
+                <label for="cardholder-name">Card Holder Name</label>
+                <input type="text" id="cardholder-name" name="cardholder_name" placeholder="Card Holder Name" required>
+            </div>
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="exp-month">Exp. Month</label>
+                    <input type="text" id="exp-month" name="exp_month" placeholder="MM" required>
+                </div>
+                <div class="input-group">
+                    <label for="exp-year">Exp. Year</label>
+                    <input type="text" id="exp-year" name="exp_year" placeholder="YYYY" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="ccv">CCV</label>
+                <input type="text" id="ccv" name="ccv" placeholder="CCV" required>
+            </div>
+            <button type="submit" class="pay-button">Pay</button>
+        </form>        
+    </div>
+</body>
+</html>
+
+{% endblock %}

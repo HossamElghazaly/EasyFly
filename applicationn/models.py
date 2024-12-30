@@ -23,7 +23,7 @@ class Flight(sql.Model):
 
 class Booking(sql.Model):
     id = sql.Column(sql.Integer, primary_key=True)
-    airline = sql.Column(sql.String(50), nullable=False)
-    booking_ref = sql.Column(sql.String(50), nullable=False)
-    email_or_last_name = sql.Column(sql.String(100), nullable=False)
+    airline = sql.Column(sql.String(100), nullable=False)
+    booking_ref = sql.Column(sql.String(10), nullable=False)
+    email_or_last_name = sql.Column(sql.String(150), nullable=False)
     created_at = sql.Column(sql.DateTime(timezone=True), server_default=func.now())

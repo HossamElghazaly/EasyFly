@@ -1,3 +1,7 @@
+
+{% extends "base.html" %} {% block title %}sign_up{% endblock %} {% block content
+    %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +38,7 @@
             justify-content: center;
             align-items: center;
             margin-bottom: 15px;
-            margin-top: 20px;
+            margin-top: 50px;
         }
 
         .logo-text {
@@ -59,6 +63,15 @@
             50% {
                 transform: scale(1.1) rotate(-45deg);
             }
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #1a1aff;
+            border-radius: 25px;
+            font-size: 16px;
         }
 
         .form-title {
@@ -112,35 +125,49 @@
             <i class="fas fa-plane logo-icon"></i>
         </div>
         <h2 class="form-title">Enter your information</h2>
-        <div class="form-group">
-            <label for="passport-number">Passport Number</label>
-            <input type="text" id="passport-number" placeholder="Enter your passport number">
-        </div>
-        <div class="form-group">
-            <label for="full-name">Full Name</label>
-            <input type="text" id="full-name" placeholder="Enter your full name">
-        </div>
-        <div class="form-group">
-            <label for="date-of-birth">Date of Birth</label>
-            <input type="date" id="date-of-birth">
-        </div>
-        <div class="form-group">
-            <label for="date-of-issue">Date of Issue</label>
-            <input type="date" id="date-of-issue">
-        </div>
-        <div class="form-group">
-            <label for="date-of-expiry">Date of Expiry</label>
-            <input type="date" id="date-of-expiry">
-        </div>
-        <div class="form-group">
-            <label for="phone-number">Phone Number</label>
-            <input type="text" id="phone-number" placeholder="Enter your phone number">
-        </div>
-        <div class="form-group">
-            <label for="email-address">E-mail Address</label>
-            <input type="email" id="email-address" placeholder="Enter your e-mail address">
-        </div>
-        <button class="btn">Go Payment</button>
-    </div>
+        <form method="POST" action="{{ url_for('auth.information') }}">
+            <div class="form-group">
+                <label for="airline">Select Airline</label>
+                <select id="airline" name="airline" required>
+                    <option value="">Select Airline</option>
+                    <option value="6E">6E</option>
+                    <option value="6B">6B</option>
+                    <option value="8D">8D</option>
+                    <option value="9D">9D</option>
+                    <option value="4A">4A</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="passport-number">Passport Number</label>
+                <input type="text" id="passport-number" name="passport_number" placeholder="Enter your passport number" required>
+            </div>
+            <div class="form-group">
+                <label for="full-name">Full Name</label>
+                <input type="text" id="full-name" name="full_name" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+                <label for="date-of-birth">Date of Birth</label>
+                <input type="date" id="date-of-birth" name="date_of_birth" required>
+            </div>
+            <div class="form-group">
+                <label for="date-of-issue">Date of Issue</label>
+                <input type="date" id="date-of-issue" name="date_of_issue" required>
+            </div>
+            <div class="form-group">
+                <label for="date-of-expiry">Date of Expiry</label>
+                <input type="date" id="date-of-expiry" name="date_of_expiry" required>
+            </div>
+            <div class="form-group">
+                <label for="phone-number">Phone Number</label>
+                <input type="text" id="phone-number" name="phone_number" placeholder="Enter your phone number" required>
+            </div>
+            <div class="form-group">
+                <label for="email-address">E-mail Address</label>
+                <input type="email" id="email-address" name="email_address" placeholder="Enter your e-mail address" required>
+            </div>
+            <button class="btn">Go Payment</button>
+        </form>        
 </body>
 </html>
+
+{% endblock %}

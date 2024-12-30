@@ -73,6 +73,25 @@ def sign_up():
     return render_template("sign_up.html", user=current_user)
 
 
+@auth.route('/seed-flights', methods=['GET'])
+def seed_flights():
+    flights = [
+        Flight(id=1, departure_city="Cairo", destination_city="Dubai", departure_date=date(2025, 1, 10), flight_class="Economy", available_seats=50, price=300.0),
+        Flight(id=2, departure_city="Cairo", destination_city="Paris", departure_date=date(2025, 1, 15), flight_class="Business", available_seats=20, price=800.0),
+        Flight(id=3, departure_city="Doha", destination_city="Abu Dhabi", departure_date=date(2025, 2, 20), flight_class="Economy", available_seats=70, price=200.0),
+        Flight(id=4, departure_city="New York", destination_city="London", departure_date=date(2025, 3, 5), flight_class="First Class", available_seats=10, price=1200.0),
+        Flight(id=5, departure_city="Tokyo", destination_city="Seoul", departure_date=date(2025, 4, 12), flight_class="Economy", available_seats=150, price=400.0)
+    ]
+
+    for flight in flights:
+        existing_flight = Flight.query.filter_by(id=flight.id).first()
+        if not existing_flight:
+            sql.session.add(flight)
+
+    sql.session.commit()
+    return "Flights have been added to the database successfully!"
+
+
 @auth.route('/home', methods=['GET', 'POST'])
 @login_required
 def home():
@@ -115,30 +134,185 @@ def home():
                         Flight.available_seats >= passengers
                     ).all()
 
+
                     if not flights:
                         flash('No flights available for the given criteria.', category='error')
                     else:
-                        return render_template('homeScreen.html', user=current_user, flights=flights)
+                        return render_template('flight details.html', user=current_user, flights=flights)
 
             except ValueError:
                 flash('Invalid date or passenger count.', category='error')
 
     return render_template('homeScreen.html', user=current_user)
 
-@auth.route('/seed-flights')
-def seed_flights():
-    # إضافة رحلات وهمية
-    flights = [
-        Flight(departure_city="Cairo", destination_city="Dubai", departure_date=date(2025, 1, 5), flight_class="Economy", available_seats=100, price=200.0),
-        Flight(departure_city="Cairo", destination_city="Paris", departure_date=date(2025, 6, 10), flight_class="Business", available_seats=50, price=500.0),
-        Flight(departure_city="Dubai", destination_city="London", departure_date=date(2025, 7, 1), flight_class="Economy", available_seats=150, price=300.0)
-    ]
 
-    for flight in flights:
-        sql.session.add(flight)
+@auth.route('/flight_details')
+@login_required
+def flight_details():
+    return render_template("flight details.html", user=current_user)
 
-    sql.session.commit()
-    return "Flights added successfully!"
+
+@auth.route('/information', methods=['GET', 'POST'])
+@login_required
+def information():
+    if request.method == 'POST':
+        required_fields = [
+            ("airline", "Airline"),
+            ("passport_number", "Passport Number"),
+            ("full_name", "Full Name"),
+            ("date_of_birth", "Date of Birth"),
+            ("date_of_issue", "Date of Issue"),
+            ("date_of_expiry", "Date of Expiry"),
+            ("phone_number", "Phone Number"),
+            ("email_address", "E-mail Address")
+        ]
+
+        for field, label in required_fields:
+            if not request.form.get(field):
+                flash(f"{label} is required.", category="error")
+                return redirect(url_for("auth.information"))
+
+        airline = request.form.get("airline")
+        passport_number = request.form.get("passport_number")
+        full_name = request.form.get("full_name")
+        date_of_birth = request.form.get("date_of_birth")
+        date_of_issue = request.form.get("date_of_issue")
+        date_of_expiry = request.form.get("date_of_expiry")
+        phone_number = request.form.get("phone_number")
+        email_address = request.form.get("email_address")
+
+        if not passport_number.isdigit() or len(passport_number) < 6:
+            flash("Passport Number must be at least 6 numbers.", category="error")
+            return redirect(url_for("auth.information"))
+
+        try:
+            dob = datetime.strptime(date_of_birth, "%Y-%m-%d").date()
+            if (date.today().year - dob.year) < 18:
+                flash("You must be at least 18 years old.", category="error")
+                return redirect(url_for("auth.information"))
+        except ValueError:
+            flash("Invalid Date of Birth format.", category="error")
+            return redirect(url_for("auth.information"))
+
+        try:
+            issue_date = datetime.strptime(date_of_issue, "%Y-%m-%d").date()
+            expiry_date = datetime.strptime(date_of_expiry, "%Y-%m-%d").date()
+
+            if issue_date >= expiry_date:
+                flash("Date of Issue must be before Date of Expiry.", category="error")
+                return redirect(url_for("auth.information"))
+
+            if expiry_date < date.today():
+                flash("Passport Expiry Date must not be in the past.", category="error")
+                return redirect(url_for("auth.information"))
+        except ValueError:
+            flash("Invalid Date format for Issue or Expiry.", category="error")
+            return redirect(url_for("auth.information"))
+
+        if not phone_number.isdigit() or len(phone_number) != 11:
+            flash("Phone Number must be exactly 11 digits.", category="error")
+            return redirect(url_for("auth.information"))
+
+        if "@" not in email_address or "." not in email_address.split("@")[-1]:
+            flash("Invalid E-mail Address.", category="error")
+            return redirect(url_for("auth.information"))
+
+        booking_ref = passport_number[-4:]
+
+        booking = Booking(
+            airline=airline,
+            booking_ref=booking_ref,
+            email_or_last_name=email_address
+        )
+        sql.session.add(booking)
+        sql.session.commit()
+
+        flash("Information submitted successfully! Proceed to payment.", category="success")
+        return redirect(url_for("auth.payment"))
+
+    return render_template("information.html", user=current_user)
+
+
+
+@auth.route('/payment', methods=['GET', 'POST'])
+@login_required
+def payment():
+    if request.method == 'POST':
+        card_number = request.form.get('card_number')
+        cardholder_name = request.form.get('cardholder_name')
+        exp_month = request.form.get('exp_month')
+        exp_year = request.form.get('exp_year')
+        ccv = request.form.get('ccv')
+
+        if not card_number or len(card_number) != 16 or not card_number.isdigit():
+            flash('Card number must be 16 numbers.', category='error')
+            return redirect(url_for('auth.payment'))
+
+        if not cardholder_name or len(cardholder_name) < 3:
+            flash('Cardholder name must be at least 3 characters.', category='error')
+            return redirect(url_for('auth.payment'))
+
+        if not exp_month or not exp_year or not exp_month.isdigit() or not exp_year.isdigit():
+            flash('Invalid expiration date.', category='error')
+            return redirect(url_for('auth.payment'))
+
+        if int(exp_month) < 1 or int(exp_month) > 12:
+            flash('Expiration month must be between 01 and 12.', category='error')
+            return redirect(url_for('auth.payment'))
+
+        if int(exp_year) < datetime.now().year:
+            flash('Expiration year must not be in the past.', category='error')
+            return redirect(url_for('auth.payment'))
+
+        if not ccv or len(ccv) != 3 or not ccv.isdigit():
+            flash('CCV must be 3 digits.', category='error')
+            return redirect(url_for('auth.payment'))
+
+        flash('Payment processed successfully!', category='success')
+        return redirect(url_for('auth.success'))  
+
+    return render_template('creditcard.html', user=current_user)
+
+
+@auth.route('/success')
+@login_required
+def success():
+    return render_template("success.html", user=current_user)
+
+
+@auth.route('/flight_status', methods=['GET', 'POST'])
+@login_required
+def flight_status():
+    flights = []
+    if request.method == 'POST':
+        flight_number = request.form.get('flight_number') 
+        date = request.form.get('date')  
+    
+        if not flight_number and not date:
+            flash('Please provide at least Flight Number or Date.', category='error')
+            return render_template('flight status.html', user=current_user)
+
+        try:
+            query = Flight.query
+            if flight_number:
+                flight_id = int(flight_number)
+                query = query.filter(Flight.id == flight_id)
+
+            if date:
+                flight_date = datetime.strptime(date, '%Y-%m-%d').date()
+                query = query.filter(Flight.departure_date == flight_date)
+
+            flights = query.all()
+
+            if not flights:
+                flash('No flights found matching the provided details.', category='error')
+
+        except ValueError:
+            flash('Invalid Flight Number or Date format.', category='error')
+
+    return render_template('flight status.html', user=current_user, flights=flights)
+
+
 
 
 @auth.route('/check-in', methods=['GET', 'POST'])
@@ -150,32 +324,36 @@ def check_in():
         email_or_last_name = request.form.get('email_or_last_name')
 
         if not airline or not booking_ref or not email_or_last_name:
-            flash('Please fill in all fields.', category='error')
-        else:
-            new_booking = Booking(
-                airline=airline,
-                booking_ref=booking_ref,
-                email_or_last_name=email_or_last_name
-            )
-            sql.session.add(new_booking)
-            sql.session.commit()
+            flash('All fields are required (Airline, Booking Ref/PNR, and Email/Last Name).', category='error')
+            return render_template("Checkin.html", user=current_user)
+
+        booking = Booking.query.filter_by(
+            airline=airline,
+            booking_ref=booking_ref,
+            email_or_last_name=email_or_last_name
+        ).first()
+
+        if booking:
             flash('Check-In completed successfully!', category='success')
+            return redirect(url_for('auth.booked'))
+        else:
+            flash('No booking found with the provided details.', category='error')
 
     return render_template("Checkin.html", user=current_user)
 
 
 
-@auth.route('/flight_status')
+@auth.route('/booked')
 @login_required
-def flight_status():
-    return render_template("flight status.html", user=current_user)
-
+def booked():
+    return render_template("booked.html", user=current_user)
 
 @auth.route('/profile')
 @login_required
 def profile():
     return render_template("profile.html", user=current_user)
     
+
 @auth.route('/change-password', methods=['GET', 'POST'])
 @login_required
 def change_password():
@@ -200,3 +378,31 @@ def change_password():
 
     return render_template('Change Password.html', user=current_user)
 
+
+@auth.route('/edit-profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        phone = request.form.get('phone')
+
+        if not username or len(username) < 2:
+            flash('Username must be at least 2 characters.', category='error')
+            return render_template('Editprofile.html', user=current_user)
+
+        if User.query.filter(User.username == username, User.id != current_user.id).first():
+            flash('Username is already taken.', category='error')
+            return render_template('Editprofile.html', user=current_user)
+
+        if not phone or not phone.isdigit() or len(phone) != 11:
+            flash('Phone number must be exactly 11 numbers.', category='error')
+            return render_template('Editprofile.html', user=current_user)
+
+        current_user.username = username
+        current_user.phone = phone
+        sql.session.commit()
+
+        flash('Profile updated successfully!', category='success')
+        return redirect(url_for('auth.profile'))
+
+    return render_template('Editprofile.html', user=current_user)
