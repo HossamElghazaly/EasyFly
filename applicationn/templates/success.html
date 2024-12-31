@@ -1,5 +1,6 @@
-{% extends "base.html" %} {% block title %}sign_up{% endblock %} {% block content
-    %}
+{% extends "base.html" %}
+{% block title %}sign_up{% endblock %}
+{% block content %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -86,6 +87,29 @@
             color: #333333;
             margin-top: 20px;
         }
+
+        /* Button Styling */
+        .go-home-button {
+            background-color: #0000FF;
+            color: white;
+            font-size: 14px;  /* Smaller font size */
+            padding: 8px 15px;  /* Smaller padding */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 160px;  /* Smaller width */
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .go-home-button:hover {
+            background-color: #0044cc;
+        }
+
+        .go-home-button:focus {
+            outline: none;
+        }
     </style>
 </head>
 <body>
@@ -100,7 +124,7 @@
         <h1 class="success-message">Success!</h1>
         <p class="description">Payment completed successfully. Check your email.</p>
         <p class="thank-you">Thank you for your trust!</p>
-        <button class="go-home-button" onclick="window.location.href='index.html'">Okay</button>
+        <button class="go-home-button" onclick="window.location.href='homeScreen.html'">Okay</button>
     </div>
 </body>
 </html>

@@ -80,7 +80,7 @@ def seed_flights():
         Flight(id=2, departure_city="Cairo", destination_city="Paris", departure_date=date(2025, 1, 15), flight_class="Business", available_seats=20, price=800.0),
         Flight(id=3, departure_city="Doha", destination_city="Abu Dhabi", departure_date=date(2025, 2, 20), flight_class="Economy", available_seats=70, price=200.0),
         Flight(id=4, departure_city="New York", destination_city="London", departure_date=date(2025, 3, 5), flight_class="First Class", available_seats=10, price=1200.0),
-        Flight(id=5, departure_city="Tokyo", destination_city="Seoul", departure_date=date(2025, 4, 12), flight_class="Economy", available_seats=150, price=400.0)
+        Flight(id=5, departure_city="Tokyo", destination_city="Seoul", departure_date=date(2025, 4, 12), flight_class="Economy Class", available_seats=150, price=400.0)
     ]
 
     for flight in flights:
