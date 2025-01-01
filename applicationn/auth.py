@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for,session
 from .models import User, Booking,Flight
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import sql
@@ -118,6 +118,8 @@ def home():
                 departure_date = datetime.strptime(departure_date, '%Y-%m-%d').date()
                 return_date = datetime.strptime(return_date, '%Y-%m-%d').date() if return_date else None
                 passengers = int(passengers)
+                
+                session['departure_date'] = departure_date.strftime('%Y-%m-%d')
 
                 if departure_date < date.today():
                     flash('Departure date cannot be in the past.', category='error')
@@ -133,7 +135,6 @@ def home():
                         Flight.flight_class.ilike(f'%{flight_class}%'),
                         Flight.available_seats >= passengers
                     ).all()
-
 
                     if not flights:
                         flash('No flights available for the given criteria.', category='error')
@@ -155,7 +156,23 @@ def flight_details():
 @auth.route('/information', methods=['GET', 'POST'])
 @login_required
 def information():
+    departure_date_str = session.get('departure_date')
+    if not departure_date_str:
+        flash("No departure date found. Please select a flight first.", category="error")
+        return redirect(url_for('auth.home'))
+
+    departure_date = datetime.strptime(departure_date_str, '%Y-%m-%d').date()
+
     if request.method == 'POST':
+        airline = request.form.get("airline")
+        passport_number = request.form.get("passport_number")
+        full_name = request.form.get("full_name")
+        date_of_birth = request.form.get("date_of_birth")
+        date_of_issue = request.form.get("date_of_issue")
+        date_of_expiry = request.form.get("date_of_expiry")
+        phone_number = request.form.get("phone_number")
+        email_address = request.form.get("email_address")
+
         required_fields = [
             ("airline", "Airline"),
             ("passport_number", "Passport Number"),
@@ -166,25 +183,15 @@ def information():
             ("phone_number", "Phone Number"),
             ("email_address", "E-mail Address")
         ]
-
         for field, label in required_fields:
             if not request.form.get(field):
                 flash(f"{label} is required.", category="error")
                 return redirect(url_for("auth.information"))
-
-        airline = request.form.get("airline")
-        passport_number = request.form.get("passport_number")
-        full_name = request.form.get("full_name")
-        date_of_birth = request.form.get("date_of_birth")
-        date_of_issue = request.form.get("date_of_issue")
-        date_of_expiry = request.form.get("date_of_expiry")
-        phone_number = request.form.get("phone_number")
-        email_address = request.form.get("email_address")
-
+            
         if not passport_number.isdigit() or len(passport_number) < 6:
             flash("Passport Number must be at least 6 numbers.", category="error")
-            return redirect(url_for("auth.information"))
-
+            return redirect(url_for("auth.information"))  
+          
         try:
             dob = datetime.strptime(date_of_birth, "%Y-%m-%d").date()
             if (date.today().year - dob.year) < 18:
@@ -193,10 +200,14 @@ def information():
         except ValueError:
             flash("Invalid Date of Birth format.", category="error")
             return redirect(url_for("auth.information"))
-
+        
         try:
             issue_date = datetime.strptime(date_of_issue, "%Y-%m-%d").date()
             expiry_date = datetime.strptime(date_of_expiry, "%Y-%m-%d").date()
+
+            if issue_date > departure_date:
+                flash("Passport issue date cannot be after the flight date.", category="error")
+                return redirect(url_for("auth.information"))
 
             if issue_date >= expiry_date:
                 flash("Date of Issue must be before Date of Expiry.", category="error")
@@ -205,8 +216,9 @@ def information():
             if expiry_date < date.today():
                 flash("Passport Expiry Date must not be in the past.", category="error")
                 return redirect(url_for("auth.information"))
+
         except ValueError:
-            flash("Invalid Date format for Issue or Expiry.", category="error")
+            flash("Invalid date format.", category="error")
             return redirect(url_for("auth.information"))
 
         if not phone_number.isdigit() or len(phone_number) != 11:
@@ -218,7 +230,6 @@ def information():
             return redirect(url_for("auth.information"))
 
         booking_ref = passport_number[-4:]
-
         booking = Booking(
             airline=airline,
             booking_ref=booking_ref,
