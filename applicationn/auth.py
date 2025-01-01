@@ -263,6 +263,10 @@ def payment():
         if int(exp_year) < datetime.now().year:
             flash('Expiration year must not be in the past.', category='error')
             return redirect(url_for('auth.payment'))
+        
+        if int(exp_month) < datetime.now().month:
+            flash('Expiration month must not be in the past.', category='error')
+            return redirect(url_for('auth.payment'))
 
         if not ccv or len(ccv) != 3 or not ccv.isdigit():
             flash('CCV must be 3 digits.', category='error')
