@@ -58,6 +58,7 @@
             0%, 100% {
                 transform: scale(1) rotate(-45deg);
             }
+
             50% {
                 transform: scale(1.1) rotate(-45deg);
             }
@@ -71,31 +72,31 @@
             margin-bottom: 20px;
         }
 
-        .title-box h1 {
-            margin: 0;
-            font-size: 1.5rem;
-        }
+            .title-box h1 {
+                margin: 0;
+                font-size: 1.5rem;
+            }
 
         .form-group {
             margin-bottom: 15px;
             text-align: left;
         }
 
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 5px;
-        }
+            .form-group label {
+                display: block;
+                font-weight: bold;
+                color: #333;
+                margin-bottom: 5px;
+            }
 
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #0000FF;
-            border-radius: 25px;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
+            .form-group input {
+                width: 100%;
+                padding: 10px;
+                border: 2px solid #0000FF;
+                border-radius: 25px;
+                font-size: 16px;
+                box-sizing: border-box;
+            }
 
         .form-inline {
             display: flex;
@@ -103,9 +104,9 @@
             gap: 10px;
         }
 
-        .form-inline .form-group {
-            flex: 1;
-        }
+            .form-inline .form-group {
+                flex: 1;
+            }
 
         .btn {
             background-color: #0000FF;
@@ -119,9 +120,9 @@
             transition: background-color 0.3s;
         }
 
-        .btn:hover {
-            background-color: #0000cc;
-        }
+            .btn:hover {
+                background-color: #0000cc;
+            }
 
         .navigation {
             display: flex;
@@ -132,18 +133,18 @@
             padding-top: 10px;
         }
 
-        .navigation a {
-            text-align: center;
-            text-decoration: none;
-            color: #333;
-            font-size: 0.8rem;
-        }
+            .navigation a {
+                text-align: center;
+                text-decoration: none;
+                color: #333;
+                font-size: 0.8rem;
+            }
 
-        .navigation a i {
-            font-size: 1.5rem;
-            color: #0000FF;
-            margin-bottom: 5px;
-        }
+                .navigation a i {
+                    font-size: 1.5rem;
+                    color: #0000FF;
+                    margin-bottom: 5px;
+                }
     </style>
 </head>
 <body>
@@ -160,119 +161,119 @@
                 <label for="from">From</label>
                 <input list="from-options" id="from" name="from" placeholder="Enter departure city" style="width: 100%; padding: 10px; border: 2px solid #0000FF; border-radius: 25px; font-size: 16px; box-sizing: border-box;">
                 <datalist id="from-options">
-                <option value="New York, USA"></option>
-                <option value="London, UK"></option>
-                <option value="Paris, France"></option>
-                <option value="Tokyo, Japan"></option>
-                <option value="Sydney, Australia"></option>
-                <option value="Toronto, Canada"></option>
-                <option value="Dubai, UAE"></option>
-                <option value="Mumbai, India"></option>
-                <option value="Shanghai, China"></option>
-                <option value="Cape Town, South Africa"></option>
-                <option value="Berlin, Germany"></option>
-                <option value="Rome, Italy"></option>
-                <option value="Bangkok, Thailand"></option>
-                <option value="Moscow, Russia"></option>
-                <option value="São Paulo, Brazil"></option>
-                <option value="Istanbul, Turkey"></option>
-                <option value="Mexico City, Mexico"></option>
-                <option value="Kuala Lumpur, Malaysia"></option>
-                <option value="Singapore, Singapore"></option>
-                <option value="Seoul, South Korea"></option>
-                <option value="Barcelona, Spain"></option>
-                <option value="Hong Kong, China"></option>
-                <option value="Los Angeles, USA"></option>
-                <option value="Buenos Aires, Argentina"></option>
-                <option value="Amsterdam, Netherlands"></option>
-                <option value="Cairo, Egypt"></option>
-                <option value="Alexandria, Egypt"></option>
-                <option value="Casablanca, Morocco"></option>
-                <option value="Doha, Qatar"></option>
-                <option value="Manila, Philippines"></option>
-                <option value="Jakarta, Indonesia"></option>
-                <option value="Bangladesh, Dhaka"></option>
-                <option value="Sydney, Australia"></option>
-                <option value="Vienna, Austria"></option>
-                <option value="Lima, Peru"></option>
-            </datalist>
-        </div>
-        <div class="form-group">
-            <label for="to">To</label>
-            <input list="to-options" id="to" name="to" placeholder="Enter destination city" style="width: 100%; padding: 10px; border: 2px solid #0000FF; border-radius: 25px; font-size: 16px; box-sizing: border-box;">
-            <datalist id="to-options">
-                <option value="New York, USA"></option>
-                <option value="London, UK"></option>
-                <option value="Paris, France"></option>
-                <option value="Tokyo, Japan"></option>
-                <option value="Sydney, Australia"></option>
-                <option value="Toronto, Canada"></option>
-                <option value="Dubai, UAE"></option>
-                <option value="Mumbai, India"></option>
-                <option value="Shanghai, China"></option>
-                <option value="Cape Town, South Africa"></option>
-                <option value="Berlin, Germany"></option>
-                <option value="Rome, Italy"></option>
-                <option value="Bangkok, Thailand"></option>
-                <option value="Moscow, Russia"></option>
-                <option value="São Paulo, Brazil"></option>
-                <option value="Istanbul, Turkey"></option>
-                <option value="Mexico City, Mexico"></option>
-                <option value="Kuala Lumpur, Malaysia"></option>
-                <option value="Singapore, Singapore"></option>
-                <option value="Seoul, South Korea"></option>
-                <option value="Barcelona, Spain"></option>
-                <option value="Hong Kong, China"></option>
-                <option value="Los Angeles, USA"></option>
-                <option value="Buenos Aires, Argentina"></option>
-                <option value="Amsterdam, Netherlands"></option>
-                <option value="Cairo, Egypt"></option>
-                <option value="Alexandria, Egypt"></option>
-                <option value="Casablanca, Morocco"></option>
-                <option value="Doha, Qatar"></option>
-                <option value="Manila, Philippines"></option>
-                <option value="Jakarta, Indonesia"></option>
-                <option value="Bangladesh, Dhaka"></option>
-                <option value="Sydney, Australia"></option>
-                <option value="Vienna, Austria"></option>
-                <option value="Lima, Peru"></option>
-            </datalist>
-        </div>
-        <div class="form-group">
-            <label for="class">Class</label>
-            <select id="class" name="class" style="width: 100%; padding: 10px; border: 2px solid #0000FF; border-radius: 25px; font-size: 16px; box-sizing: border-box;">
-                <option value="economy">Economy Class</option>
-                <option value="premium-economy">Premium Economy</option>
-                <option value="business">Business Class</option>
-                <option value="first">First Class</option>
-            </select>
-        </div>
-        <div class="form-inline">
-            <div class="form-group">
-                <label for="start">Start</label>
-                <input type="date" id="start" name="start">
+                    <option value="New York, USA"></option>
+                    <option value="London, UK"></option>
+                    <option value="Paris, France"></option>
+                    <option value="Tokyo, Japan"></option>
+                    <option value="Sydney, Australia"></option>
+                    <option value="Toronto, Canada"></option>
+                    <option value="Dubai, UAE"></option>
+                    <option value="Mumbai, India"></option>
+                    <option value="Shanghai, China"></option>
+                    <option value="Cape Town, South Africa"></option>
+                    <option value="Berlin, Germany"></option>
+                    <option value="Rome, Italy"></option>
+                    <option value="Bangkok, Thailand"></option>
+                    <option value="Moscow, Russia"></option>
+                    <option value="São Paulo, Brazil"></option>
+                    <option value="Istanbul, Turkey"></option>
+                    <option value="Mexico City, Mexico"></option>
+                    <option value="Kuala Lumpur, Malaysia"></option>
+                    <option value="Singapore, Singapore"></option>
+                    <option value="Seoul, South Korea"></option>
+                    <option value="Barcelona, Spain"></option>
+                    <option value="Hong Kong, China"></option>
+                    <option value="Los Angeles, USA"></option>
+                    <option value="Buenos Aires, Argentina"></option>
+                    <option value="Amsterdam, Netherlands"></option>
+                    <option value="Cairo, Egypt"></option>
+                    <option value="Alexandria, Egypt"></option>
+                    <option value="Casablanca, Morocco"></option>
+                    <option value="Doha, Qatar"></option>
+                    <option value="Manila, Philippines"></option>
+                    <option value="Jakarta, Indonesia"></option>
+                    <option value="Bangladesh, Dhaka"></option>
+                    <option value="Sydney, Australia"></option>
+                    <option value="Vienna, Austria"></option>
+                    <option value="Lima, Peru"></option>
+                </datalist>
             </div>
             <div class="form-group">
-                <label for="return">Return Date</label>
-                <input type="date" id="return" name="return">
+                <label for="to">To</label>
+                <input list="to-options" id="to" name="to" placeholder="Enter destination city" style="width: 100%; padding: 10px; border: 2px solid #0000FF; border-radius: 25px; font-size: 16px; box-sizing: border-box;">
+                <datalist id="to-options">
+                    <option value="New York, USA"></option>
+                    <option value="London, UK"></option>
+                    <option value="Paris, France"></option>
+                    <option value="Tokyo, Japan"></option>
+                    <option value="Sydney, Australia"></option>
+                    <option value="Toronto, Canada"></option>
+                    <option value="Dubai, UAE"></option>
+                    <option value="Mumbai, India"></option>
+                    <option value="Shanghai, China"></option>
+                    <option value="Cape Town, South Africa"></option>
+                    <option value="Berlin, Germany"></option>
+                    <option value="Rome, Italy"></option>
+                    <option value="Bangkok, Thailand"></option>
+                    <option value="Moscow, Russia"></option>
+                    <option value="São Paulo, Brazil"></option>
+                    <option value="Istanbul, Turkey"></option>
+                    <option value="Mexico City, Mexico"></option>
+                    <option value="Kuala Lumpur, Malaysia"></option>
+                    <option value="Singapore, Singapore"></option>
+                    <option value="Seoul, South Korea"></option>
+                    <option value="Barcelona, Spain"></option>
+                    <option value="Hong Kong, China"></option>
+                    <option value="Los Angeles, USA"></option>
+                    <option value="Buenos Aires, Argentina"></option>
+                    <option value="Amsterdam, Netherlands"></option>
+                    <option value="Cairo, Egypt"></option>
+                    <option value="Alexandria, Egypt"></option>
+                    <option value="Casablanca, Morocco"></option>
+                    <option value="Doha, Qatar"></option>
+                    <option value="Manila, Philippines"></option>
+                    <option value="Jakarta, Indonesia"></option>
+                    <option value="Bangladesh, Dhaka"></option>
+                    <option value="Sydney, Australia"></option>
+                    <option value="Vienna, Austria"></option>
+                    <option value="Lima, Peru"></option>
+                </datalist>
             </div>
             <div class="form-group">
-                <label for="passenger">Passenger(s)</label>
-                <input type="text" id="passenger" name="passenger" placeholder="Enter number">
-            </div>    
-        </div>
-        <button class="btn" type="submit">Book Flight</button>
+                <label for="class">Class</label>
+                <select id="class" name="class" style="width: 100%; padding: 10px; border: 2px solid #0000FF; border-radius: 25px; font-size: 16px; box-sizing: border-box;">
+                    <option value="economy">Economy Class</option>
+                    <option value="premium-economy">Premium Economy</option>
+                    <option value="business">Business Class</option>
+                    <option value="first">First Class</option>
+                </select>
+            </div>
+            <div class="form-inline">
+                <div class="form-group">
+                    <label for="start">Start</label>
+                    <input type="date" id="start" name="start">
+                </div>
+                <div class="form-group">
+                    <label for="return">Return Date</label>
+                    <input type="date" id="return" name="return">
+                </div>
+                <div class="form-group">
+                    <label for="passenger">Passenger(s)</label>
+                    <input type="text" id="passenger" name="passenger" placeholder="Enter number">
+                </div>
+            </div>
+            <button class="btn" type="submit">Book Flight</button>
         </form>
         <div class="navigation">
-            <a href="{{ url_for('auth.home') }}">  
+            <a href="{{ url_for('auth.home') }}">
                 <i class="fas fa-home"></i>
                 <p>Home</p>
             </a>
-            <a href="{{ url_for('auth.check_in') }}">  
+            <a href="{{ url_for('auth.check_in') }}">
                 <i class="fas fa-plane"></i>
                 <p>Check-In</p>
             </a>
-            <a href="{{ url_for('auth.flight_status') }}">  
+            <a href="{{ url_for('auth.flight_status') }}">
                 <i class="fas fa-clock"></i>
                 <p>Flight Status</p>
             </a>
@@ -282,7 +283,10 @@
             </a>
         </div>
     </div>
+    <script src="D:\University\Fall 2024\Software Engineering\EasyFly\EasyFly\applicationn\js\Script.js"></script>
+
 </body>
 </html>
+
 
 {% endblock %}
