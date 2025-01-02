@@ -213,8 +213,8 @@ def information():
                 flash("Date of Issue must be before Date of Expiry.", category="error")
                 return redirect(url_for("auth.information"))
 
-            if expiry_date < date.today():
-                flash("Passport Expiry Date must not be in the past.", category="error")
+            if expiry_date < departure_date:
+                flash("Passport expiry date cannot be before the flight date.", category="error")
                 return redirect(url_for("auth.information"))
 
         except ValueError:
@@ -300,32 +300,14 @@ def success():
 def flight_status():
     flights = []
     if request.method == 'POST':
-        flight_number = request.form.get('flight_number') 
-        date = request.form.get('date')  
-    
-        if not flight_number and not date:
-            flash('Please provide at least Flight Number or Date.', category='error')
-            return render_template('flight status.html', user=current_user)
+        flight_number = request.form.get('flight_number')
 
-        try:
-            query = Flight.query
-            if flight_number:
-                flight_id = int(flight_number)
-                query = query.filter(Flight.id == flight_id)
-
-            if date:
-                flight_date = datetime.strptime(date, '%Y-%m-%d').date()
-                query = query.filter(Flight.departure_date == flight_date)
-
-            flights = query.all()
-
-            if not flights:
-                flash('No flights found matching the provided details.', category='error')
-
-        except ValueError:
-            flash('Invalid Flight Number or Date format.', category='error')
+        if not flight_number or len(flight_number) < 4 or not flight_number.isdigit():
+            flash('Flight number must be at least 8 digits and contain only numbers.', category='error')
+            return redirect(url_for('auth.flight_status'))
 
     return render_template('flight status.html', user=current_user, flights=flights)
+
 
 
 
@@ -421,3 +403,10 @@ def edit_profile():
         return redirect(url_for('auth.profile'))
 
     return render_template('Editprofile.html', user=current_user)
+
+
+@auth.route('/successstatus', methods=['GET', 'POST'])
+@login_required
+def successstatus():
+    return render_template("successtatu.html", user=current_user)
+
